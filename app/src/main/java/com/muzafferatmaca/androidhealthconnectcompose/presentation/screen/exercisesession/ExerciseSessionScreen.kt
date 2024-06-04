@@ -95,6 +95,7 @@ fun ExerciseSessionScreen(
                 }
 
                 items(sessionsList) { session ->
+                    println(sessionsList)
                     ExerciseSessionRow(
                         ZonedDateTime.ofInstant(session.startTime, session.startZoneOffset),
                         ZonedDateTime.ofInstant(session.endTime, session.endZoneOffset),

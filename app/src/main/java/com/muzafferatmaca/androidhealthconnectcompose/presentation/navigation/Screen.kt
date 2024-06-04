@@ -12,11 +12,11 @@ sealed class Screen(val route: String, val titleId: Int, val hasMenuItem: Boolea
     data object WelcomeScreen : Screen(route = "welcome_screen", titleId = R.string.welcome_screen, hasMenuItem = false)
     data object ExerciseSessions : Screen(route = "exercise_sessions", titleId = R.string.exercise_sessions)
     data object ExerciseSessionDetail : Screen(
-        route = "exercise_session_detail?$UID_NAV_ARGUMENT={$UID_NAV_ARGUMENT}",
+        route = "exercise_session_detail/$UID_NAV_ARGUMENT",
         titleId = R.string.exercise_session_detail,
         hasMenuItem = false
     ) {
-        fun passArgs(args: String) = "exercise_session_detail?$UID_NAV_ARGUMENT = $args"
+        fun passArgs(args: String) = "exercise_session_detail/$args"
     }
     data object InputReadings : Screen(route = "input_readings", titleId = R.string.input_readings)
     data object DifferentialChanges : Screen(route = "differential_changes", titleId = R.string.differential_changes)
