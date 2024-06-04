@@ -1,4 +1,4 @@
-package com.muzafferatmaca.androidhealthconnectcompose.ui.theme
+package com.muzafferatmaca.androidhealthconnectcompose.presentation.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

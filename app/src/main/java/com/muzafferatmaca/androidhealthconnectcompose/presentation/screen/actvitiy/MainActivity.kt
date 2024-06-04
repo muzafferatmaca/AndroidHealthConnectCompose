@@ -1,4 +1,4 @@
-package com.muzafferatmaca.androidhealthconnectcompose.presentation
+package com.muzafferatmaca.androidhealthconnectcompose.presentation.screen.actvitiy
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,37 +11,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.muzafferatmaca.androidhealthconnectcompose.presentation.screen.App
 import com.muzafferatmaca.androidhealthconnectcompose.presentation.theme.AndroidHealthConnectComposeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+        val healthConnectManager = (application as App).healthConnectManager
         setContent {
-            AndroidHealthConnectComposeTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            HealthConnectApp(healthConnectManager = healthConnectManager)
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    AndroidHealthConnectComposeTheme {
-        Greeting("Android")
     }
 }

@@ -1,4 +1,4 @@
-package com.muzafferatmaca.androidhealthconnectcompose.util
+package com.muzafferatmaca.androidhealthconnectcompose.utils
 
 import android.annotation.SuppressLint
 import java.time.Duration

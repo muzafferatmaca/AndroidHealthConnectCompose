@@ -29,7 +29,7 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 # Icons
-androidx-material-icon-extended = {group = "androidx.compose.ui", name = "material-icons-extended"}
+androidx-material-icon-extended = {group = "androidx.compose.material", name = "material-icons-extended"}
 # Health Connect SDK
 androidx-connect-client = {group = "androidx.health.connect", name ="connect-client",version.ref = "connectClient"}
 # ViewModel
