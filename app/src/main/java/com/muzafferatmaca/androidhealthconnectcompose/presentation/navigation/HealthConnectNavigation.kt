@@ -11,6 +11,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navDeepLink
+import androidx.navigation.toRoute
 import com.muzafferatmaca.androidhealthconnectcompose.data.HealthConnectManager
 import com.muzafferatmaca.androidhealthconnectcompose.presentation.screen.changes.DifferentialChangesScreen
 import com.muzafferatmaca.androidhealthconnectcompose.presentation.screen.changes.DifferentialChangesViewModel
@@ -40,7 +41,7 @@ fun HealthConnectNavigation(
     snackbarState: SnackbarHostState,
 ) {
     val scope = rememberCoroutineScope()
-    NavHost(navController = navController, startDestination = Screen.WelcomeScreen.route) {
+    NavHost(navController = navController, startDestination = Screen.WelcomeScreen) {
         val availability by healthConnectManager.availability
         welcomeScreen(availability,healthConnectManager)
         exerciseSessions(healthConnectManager,navController,snackbarState,scope)
@@ -55,7 +56,7 @@ fun NavGraphBuilder.welcomeScreen(
     availability: HealthConnectAvailability,
     healthConnectManager: HealthConnectManager
 ) {
-    composable(Screen.WelcomeScreen.route) {
+    composable<Screen.WelcomeScreen> {
         WelcomeScreen(
             healthConnectAvailability = availability,
             onResumeAvailabilityCheck = {
@@ -71,7 +72,7 @@ fun NavGraphBuilder.exerciseSessions(
     snackbarHostState: SnackbarHostState,
     scope: CoroutineScope
 ) {
-    composable(Screen.ExerciseSessions.route) {
+    composable<Screen.ExerciseSessions> {
         val viewModel: ExerciseSessionViewModel = viewModel(
             factory = ExerciseSessionViewModelFactory(
                 healthConnectManager = healthConnectManager
@@ -94,7 +95,7 @@ fun NavGraphBuilder.exerciseSessions(
                 viewModel.insertExerciseSession()
             },
             onDetailsClick = { uid ->
-                navController.navigate(Screen.ExerciseSessionDetail.passArgs(uid))
+                navController.navigate(Screen.ExerciseSessionDetail(uid))
             },
             onError = { exception ->
                 showExceptionSnackBar(snackbarHostState, scope, exception)
@@ -114,11 +115,11 @@ fun NavGraphBuilder.exerciseSessionDetail(
     snackbarHostState: SnackbarHostState,
     scope: CoroutineScope,
 ) {
-    composable(Screen.ExerciseSessionDetail.route) {
-        val uid = it.arguments?.getString(UID_NAV_ARGUMENT)!!
+    composable<Screen.ExerciseSessionDetail> {
+        val exerciseSessionDetail = it.toRoute<Screen.ExerciseSessionDetail>()
         val viewModel: ExerciseSessionDetailViewModel = viewModel(
             factory = ExerciseSessionDetailViewModelFactory(
-                uid = uid,
+                uid = exerciseSessionDetail.id,
                 healthConnectManager = healthConnectManager
             )
         )
@@ -153,7 +154,7 @@ fun NavGraphBuilder.inputReadings(
     snackbarHostState: SnackbarHostState,
     scope: CoroutineScope
 ) {
-    composable(Screen.InputReadings.route) {
+    composable<Screen.InputReadings> {
         val viewModel: InputReadingsViewModel = viewModel(
             factory = InputReadingsViewModelFactory(
                 healthConnectManager = healthConnectManager
@@ -196,7 +197,7 @@ fun NavGraphBuilder.differentialChanges(
     snackbarHostState: SnackbarHostState,
     scope: CoroutineScope
 ) {
-    composable(Screen.DifferentialChanges.route) {
+    composable<Screen.DifferentialChanges> {
         val viewModel: DifferentialChangesViewModel = viewModel(
             factory = DifferentialChangesViewModelFactory(
                 healthConnectManager = healthConnectManager
@@ -235,8 +236,7 @@ fun NavGraphBuilder.differentialChanges(
 }
 
 fun NavGraphBuilder.privacyPolicy() {
-    composable(
-        route = Screen.PrivacyPolicy.route,
+    composable<Screen.PrivacyPolicy>(
         deepLinks = listOf(
             navDeepLink {
                 action = "androidx.health.ACTION_SHOW_PERMISSIONS_RATIONALE"

@@ -60,12 +60,12 @@ fun HealthConnectApp(healthConnectManager: HealthConnectManager) {
                     TopAppBar(
                         title = {
                             val titleId = when (currentRoute) {
-                                Screen.ExerciseSessions.route -> Screen.ExerciseSessions.titleId
-                                Screen.InputReadings.route -> Screen.InputReadings.titleId
-                                Screen.DifferentialChanges.route -> Screen.DifferentialChanges.titleId
+                                Screen.ExerciseSessions.toString() -> Screen.ExerciseSessions.toString()
+                                Screen.InputReadings.toString() -> Screen.InputReadings.toString()
+                                Screen.DifferentialChanges.toString() -> Screen.DifferentialChanges.toString()
                                 else -> R.string.app_name
                             }
-                            Text(stringResource(titleId))
+                            Text(text = titleId.toString())
                         },
                         navigationIcon = {
                             IconButton(

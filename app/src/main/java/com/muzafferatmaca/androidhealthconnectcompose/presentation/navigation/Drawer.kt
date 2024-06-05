@@ -50,7 +50,7 @@ fun Drawer(
 ) {
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
-    val currentRoute = navBackStackEntry?.destination?.route
+    val currentRoute = navBackStackEntry?.destination
     val activity = LocalContext.current
 
     Column {
@@ -62,7 +62,7 @@ fun Drawer(
                 modifier = Modifier
                     .width(96.dp)
                     .clickable {
-                        navController.navigate(Screen.WelcomeScreen.route) {
+                        navController.navigate(Screen.WelcomeScreen) {
                             navController.graph.startDestinationRoute?.let { route ->
                                 popUpTo(route) {
                                     saveState = true
@@ -86,12 +86,12 @@ fun Drawer(
             text = stringResource(id = R.string.app_name)
         )
         Spacer(modifier = Modifier.height(16.dp))
-        Screen.allScreens.filter { it.hasMenuItem }.forEach { item ->
+        Screen.allScreens.filter { it.hasMenuItem }.forEach {item ->
             DrawerItem(
                 item = item,
-                selected = item.route == currentRoute,
+                selected = item == currentRoute,
                 onItemClick = {
-                    navController.navigate(item.route) {
+                    navController.navigate(item) {
                         // See: https://developer.android.com/jetpack/compose/navigation#nav-to-composable
                         navController.graph.startDestinationRoute?.let { route ->
                             popUpTo(route) {

@@ -33,7 +33,7 @@ fun DrawerItem(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
-            text = stringResource(item.titleId),
+            text = "$item",
             style = MaterialTheme.typography.headlineSmall,
             color = if (selected) {
                 MaterialTheme.colorScheme.primary
